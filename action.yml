@@ -1,0 +1,39 @@
+name: 'Django Migrations Action'
+description: 'Handles Django database migrations'
+inputs:
+  DJANGO_DB_HOST:
+    description: 'Database host'
+    required: true
+  DJANGO_DB_PORT:
+    description: 'Database port'
+    required: true
+  DJANGO_DB_NAME:
+    description: 'Database name'
+    required: true
+  DJANGO_DB_USER:
+    description: 'Database user'
+    required: true
+  DJANGO_DB_PASSWORD:
+    description: 'Database password'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+      shell: bash
+    - name: Install Django
+      run: pip install Django
+      shell: bash
+    - name: Apply migrations
+      run: |
+        python manage.py migrate
+      shell: bash
+      env:
+        DJANGO_DB_HOST: ${{ inputs.DJANGO_DB_HOST }}
+        DJANGO_DB_PORT: ${{ inputs.DJANGO_DB_PORT }}
+        DJANGO_DB_NAME: ${{ inputs.DJANGO_DB_NAME }}
+        DJANGO_DB_USER: ${{ inputs.DJANGO_DB_USER }}
+        DJANGO_DB_PASSWORD: ${{ inputs.DJANGO_DB_PASSWORD }}
