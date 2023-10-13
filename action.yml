@@ -20,16 +20,16 @@ runs:
   using: 'composite'
   steps:
     - name: Set up Python 3.8
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
+      run: |
+        sudo apt-get update
+        sudo apt-get install python3.8 python3-pip
+        python3.8 -m pip install --upgrade pip
       shell: bash
     - name: Install Django
-      run: pip install Django
+      run: python3.8 -m pip install Django
       shell: bash
     - name: Apply migrations
-      run: |
-        python manage.py migrate
+      run: python3.8 manage.py migrate
       shell: bash
       env:
         DJANGO_DB_HOST: ${{ inputs.DJANGO_DB_HOST }}
