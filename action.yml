@@ -1,19 +1,19 @@
 name: 'Django Migrations Action'
 description: 'Handles Django database migrations'
 inputs:
-  DJANGO_DB_HOST:
+  DB_HOST:
     description: 'Database host'
     required: true
-  DJANGO_DB_PORT:
+  DB_PORT:
     description: 'Database port'
     required: true
-  DJANGO_DB_NAME:
+  DB_NAME:
     description: 'Database name'
     required: true
-  DJANGO_DB_USER:
+  DB_USER:
     description: 'Database user'
     required: true
-  DJANGO_DB_PASSWORD:
+  DB_PASSWORD:
     description: 'Database password'
     required: true
 runs:
@@ -33,8 +33,8 @@ runs:
         python manage.py migrate
       shell: bash
       env:
-        DJANGO_DB_HOST: ${{ inputs.DJANGO_DB_HOST }}
-        DJANGO_DB_PORT: ${{ inputs.DJANGO_DB_PORT }}
-        DJANGO_DB_NAME: ${{ inputs.DJANGO_DB_NAME }}
-        DJANGO_DB_USER: ${{ inputs.DJANGO_DB_USER }}
-        DJANGO_DB_PASSWORD: ${{ inputs.DJANGO_DB_PASSWORD }}
+        DB_HOST: ${{ inputs.DB_HOST }}
+        DB_PORT: ${{ inputs.DB_PORT }}
+        DB_NAME: ${{ inputs.DB_NAME }}
+        DB_USER: ${{ inputs.DB_USER }}
+        DB_PASSWORD: ${{ inputs.DB_PASSWORD }}
